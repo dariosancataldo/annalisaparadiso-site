@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansia e attacchi di panico - Annalisa Paradiso</title>
+    <meta name="description" content="L'ansia può manifestarsi in molte forme. Capire cosa succede nel corpo e nella mente durante un attacco di panico è il primo passo verso la guarigione.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../index.html#styles">
+    <style>
+        :root {
+            --text-xs: clamp(.75rem,.7rem + .25vw,.875rem);
+            --text-sm: clamp(.875rem,.8rem + .35vw,1rem);
+            --text-base: clamp(1rem,1rem + 0vw,1rem);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: linear-gradient(135deg, #fdfbfb 0%, #f7f4f0 100%);
+        }
+        
+        .site-header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            text-decoration: none;
+        }
+        
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #f7fafc;
+        }
+        
+        .article-hero {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1600&h=800&fit=crop') center/cover;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            color: white;
+            width: 100%;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        .article-excerpt {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            max-width: 600px;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .article-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: #1a202c;
+        }
+        
+        .article-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: #2d3748;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        
+        .article-content strong {
+            font-weight: 600;
+            color: #1a202c;
+        }
+        
+        .highlight-box {
+            background: #f7f4f0;
+            border-left: 4px solid #d4a574;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 3rem auto;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateX(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="brand">Annalisa Paradiso</a>
+            <div class="nav-actions">
+                <a href="../index.html#blog" class="btn btn-secondary">← Torna al sito</a>
+            </div>
+        </div>
+    </header>
+
+    <article>
+        <div class="article-hero">
+            <div class="hero-content">
+                <div class="article-meta">
+                    <span class="meta-item">📅 5 min di lettura</span>
+                    <span class="meta-item">🏷️ Ansia</span>
+                </div>
+                <h1 class="article-title">Ansia e attacchi di panico: riconoscere i segnali e chiedere aiuto</h1>
+                <p class="article-excerpt">L'ansia può manifestarsi in molte forme. Capire cosa succede nel corpo e nella mente durante un attacco di panico è il primo passo verso la guarigione.</p>
+            </div>
+        </div>
+
+        <div class="article-content">
+            <p>L'<strong>ansia</strong> è un'esperienza universale: tutti, prima o poi, ci siamo sentiti preoccupati, agitati o nervosi. Ma quando l'ansia diventa intensa, persistente e interferisce con la vita quotidiana, può trasformarsi in un vero e proprio disturbo che necessita di attenzione e cura.</p>
+
+            <h2>Cos'è un attacco di panico?</h2>
+            <p>Un <strong>attacco di panico</strong> è un episodio improvviso di paura intensa che raggiunge il picco in pochi minuti. Durante un attacco di panico, il corpo attiva una risposta di "lotta o fuga", anche in assenza di un pericolo reale.</p>
+
+            <div class="highlight-box">
+                <p><strong>I sintomi più comuni includono:</strong></p>
+                <ul>
+                    <li>Palpitazioni o battito cardiaco accelerato</li>
+                    <li>Sudorazione eccessiva</li>
+                    <li>Tremori o scosse</li>
+                    <li>Sensazione di soffocamento o mancanza d'aria</li>
+                    <li>Dolore o fastidio al petto</li>
+                    <li>Nausea o disturbi addominali</li>
+                    <li>Sensazione di vertigini, instabilità o svenimento</li>
+                    <li>Paura di perdere il controllo o di impazzire</li>
+                    <li>Paura di morire</li>
+                </ul>
+            </div>
+
+            <h2>Perché succede?</h2>
+            <p>Gli attacchi di panico non sono un segno di debolezza. Sono il risultato di un <strong>sistema nervoso iperattivo</strong> che interpreta erroneamente segnali interni (come un battito cardiaco accelerato) come minacce.</p>
+
+            <p>Alcuni fattori che possono contribuire includono:</p>
+            <ul>
+                <li><strong>Predisposizione genetica:</strong> l'ansia può avere una componente familiare</li>
+                <li><strong>Stress prolungato:</strong> periodi di forte tensione emotiva</li>
+                <li><strong>Eventi traumatici:</strong> esperienze difficili del passato</li>
+                <li><strong>Cambiamenti significativi:</strong> lutti, separazioni, trasferimenti</li>
+                <li><strong>Consumo di sostanze:</strong> caffeina, alcol o droghe</li>
+            </ul>
+
+            <h2>Il ciclo dell'ansia</h2>
+            <p>Spesso, chi ha sperimentato un attacco di panico sviluppa la <strong>paura della paura</strong>: inizia a temere che l'attacco si ripeta, ed è proprio questa paura anticipatoria a mantenere vivo il disturbo. Si crea così un circolo vizioso:</p>
+
+            <p><strong>Pensiero ansioso → Attivazione fisica → Interpretazione catastrofica → Panico → Evitamento</strong></p>
+
+            <h2>Come gestire un attacco di panico</h2>
+            <p>Quando senti arrivare un attacco di panico, ricorda che:</p>
+            <ul>
+                <li>Gli attacchi di panico, per quanto spaventosi, <strong>non sono pericolosi</strong></li>
+                <li>L'episodio raggiungerà il picco e poi diminuirà naturalmente</li>
+                <li>Non stai per impazzire, né per avere un infarto</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Strategie immediate che possono aiutare:</strong></p>
+                <ol>
+                    <li><strong>Respira lentamente:</strong> inspira per 4 secondi, trattieni per 2, espira per 6</li>
+                    <li><strong>Radicati al presente:</strong> nomina 5 cose che vedi, 4 che tocchi, 3 che senti, 2 che annusi, 1 che gusti</li>
+                    <li><strong>Accetta la sensazione:</strong> invece di lottare contro il panico, prova a osservarlo senza giudicarlo</li>
+                    <li><strong>Ricorda che passerà:</strong> gli attacchi di panico durano in media 10-20 minuti</li>
+                </ol>
+            </div>
+
+            <h2>Quando chiedere aiuto professionale</h2>
+            <p>Se gli attacchi di panico sono frequenti, se eviti situazioni per paura che si ripetano, o se l'ansia limita significativamente la tua vita, è importante <strong>rivolgerti a uno psicoterapeuta</strong>.</p>
+
+            <p>La <strong>terapia cognitivo-comportamentale</strong> è particolarmente efficace per il disturbo da attacchi di panico. Attraverso la psicoterapia, puoi:</p>
+            <ul>
+                <li>Comprendere i meccanismi dell'ansia</li>
+                <li>Modificare i pensieri catastrofici</li>
+                <li>Imparare tecniche di gestione dell'ansia</li>
+                <li>Affrontare gradualmente le situazioni evitate</li>
+                <li>Riacquistare fiducia in te stesso/a</li>
+            </ul>
+
+            <h2>Un messaggio di speranza</h2>
+            <p>Se soffri di attacchi di panico, ricorda: <strong>non sei solo/a</strong>. Milioni di persone nel mondo vivono questa esperienza, e molte hanno trovato sollievo attraverso la psicoterapia.</p>
+
+            <p>L'ansia si può affrontare, i sintomi possono essere gestiti, e la qualità della vita può migliorare notevolmente. Il primo passo è riconoscere il problema e cercare supporto. <strong>Chiedere aiuto non è un segno di debolezza, ma di coraggio.</strong></p>
+
+            <a href="index.html" class="back-link">← Torna al blog</a>
+        </div>
+    </article>
+</body>
+</html>
