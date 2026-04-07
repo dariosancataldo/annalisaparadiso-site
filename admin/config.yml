@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: dariosancataldo/annalisaparadiso-site
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "news"
+    label: "News"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "approfondimenti"
+    label: "Approfondimenti"
+    folder: "content/approfondimenti"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
