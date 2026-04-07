@@ -127,15 +127,26 @@ section{padding:4.5rem 0} .section-head{display:flex;justify-content:space-betwe
 <section id="news">
   <div class="container">
     <div class="section-head"><div><h2>News e aggiornamenti</h2></div><p>Uno spazio dedicato a comunicazioni utili, nuovi contenuti pubblicati, aggiornamenti professionali e brevi riflessioni su temi psicologici attuali.</p></div>
-    <div class="grid-2">
-          <div id="news-grid" class="grid-2">
+    <div id="news-grid" class="grid-3">
             <article class="card news-card">
-              <span class="meta-label">Aggiornamenti</span>
-              <h3>Caricamento news in corso</h3>
-              <p>Sto recuperando gli aggiornamenti pubblicati per mostrare automaticamente i contenuti inseriti dal CMS.</p>
+              <span class="meta-label">AGGIORNAMENTO</span>
+              <h3>La psicoterapia online: efficacia confermata dalla ricerca</h3>
+              <p>Studi recenti confermano che la psicoterapia condotta a distanza tramite videochiamata è efficace quanto quella in presenza per il trattamento di ansia, depressione e stress. Un dato importante per chi cerca supporto psicologico flessibile e accessibile.</p>
+              <p class="microcopy" style="margin-top:.8rem;color:var(--faint);">Aprile 2026</p>
             </article>
-          </div>
-</div>
+            <article class="card news-card">
+              <span class="meta-label">AGGIORNAMENTO</span>
+              <h3>Approccio psicoanalitico e neuroscienze: un dialogo sempre più fertile</h3>
+              <p>Il dialogo tra psicoanalisi e neuroscienze sta aprendo nuove prospettive nella comprensione dei meccanismi emotivi profondi. Le ricerche più recenti mostrano come i processi inconsci abbiano una base neurobiologica misurabile.</p>
+              <p class="microcopy" style="margin-top:.8rem;color:var(--faint);">Aprile 2026</p>
+            </article>
+            <article class="card news-card">
+              <span class="meta-label">AGGIORNAMENTO</span>
+              <h3>Burnout: riconoscerlo in tempo per prendersi cura di sé</h3>
+              <p>Il burnout non riguarda solo le professioni sanitarie. Sempre più persone sperimentano esaurimento emotivo, distacco e calo di autostima. La psicoterapia rappresenta uno spazio prezioso per riconoscere i segnali e ritrovare equilibrio.</p>
+              <p class="microcopy" style="margin-top:.8rem;color:var(--faint);">Aprile 2026</p>
+            </article>
+    </div>
   </div>
 </section>
 <section>
@@ -222,68 +233,6 @@ document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('c
 
 
 
-<script>
-(function(){
-  const newsGrid = document.getElementById('news-grid');
-  if (!newsGrid) return;
-
-  const FALLBACK_NEWS = [
-    {
-      title: 'Nuovi approfondimenti su ansia, stress e relazioni',
-      excerpt: 'Aggiornamenti sui nuovi articoli pubblicati e sui temi affrontati più di recente all'interno del sito, per orientarsi con maggiore chiarezza tra i contenuti disponibili.',
-      date: ''
-    },
-    {
-      title: 'Contenuti brevi per orientarsi meglio',
-      excerpt: 'Comunicazioni sintetiche, riflessioni essenziali e aggiornamenti legati all'attività professionale e ai percorsi di supporto.',
-      date: ''
-    }
-  ];
-
-  const monthNames = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-
-  function formatDate(value){
-    if (!value) return '';
-    const d = new Date(value);
-    if (Number.isNaN(d.getTime())) return '';
-    return d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
-  }
-
-  function escapeHtml(str){
-    return String(str || '').replace(/[&<>"']/g, function(char){
-      return ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]);
-    });
-  }
-
-  function render(items){
-    const list = items && items.length ? items : FALLBACK_NEWS;
-    newsGrid.innerHTML = list.map(function(item){
-      const title = escapeHtml(item.title || 'Aggiornamento');
-      const excerpt = escapeHtml(item.excerpt || 'Nuovo contenuto disponibile.');
-      const date = item.date ? '<p class="microcopy" style="margin-top:.8rem;color:var(--faint);">' + escapeHtml(formatDate(item.date)) + '</p>' : '';
-      return '' +
-        '<article class="card news-card">' +
-          '<span class="meta-label">Aggiornamenti</span>' +
-          '<h3>' + title + '</h3>' +
-          '<p>' + excerpt + '</p>' +
-          date +
-        '</article>';
-    }).join('');
-  }
-
-  fetch('./content/news/index.json', { cache: 'no-store' })
-    .then(function(response){
-      if (!response.ok) throw new Error('index.json non trovato');
-      return response.json();
-    })
-    .then(function(data){
-      const items = Array.isArray(data) ? data : (Array.isArray(data.news) ? data.news : []);
-      render(items);
-    })
-    .catch(function(){
-      render(FALLBACK_NEWS);
-    });
-})();
-</script>
+<!-- News are now rendered statically -->
 </body>
 </html>
