@@ -128,9 +128,14 @@ section{padding:4.5rem 0} .section-head{display:flex;justify-content:space-betwe
   <div class="container">
     <div class="section-head"><div><h2>News e aggiornamenti</h2></div><p>Uno spazio dedicato a comunicazioni utili, nuovi contenuti pubblicati, aggiornamenti professionali e brevi riflessioni su temi psicologici attuali.</p></div>
     <div class="grid-2">
-      <article class="card news-card"><span class="meta-label">Aggiornamento</span><h3>Nuovi approfondimenti su ansia, stress e relazioni</h3><p>Aggiornamenti sui nuovi articoli pubblicati e sui temi affrontati più di recente all’interno del sito, per orientarsi con maggiore chiarezza tra i contenuti disponibili.</p></article>
-      <article class="card news-card"><span class="meta-label">Aggiornamento</span><h3>Contenuti brevi per orientarsi meglio</h3><p>Comunicazioni sintetiche, riflessioni essenziali e aggiornamenti legati all’attività professionale e ai percorsi di supporto.</p></article>
-    </div>
+          <div id="news-grid" class="grid-2">
+            <article class="card news-card">
+              <span class="meta-label">Aggiornamenti</span>
+              <h3>Caricamento contenuti in corso</h3>
+              <p>Sto recuperando gli ultimi aggiornamenti pubblicati, così da mostrare automaticamente le news inserite dal CMS.</p>
+            </article>
+          </div>
+</div>
   </div>
 </section>
 <section>
@@ -213,6 +218,143 @@ section{padding:4.5rem 0} .section-head{display:flex;justify-content:space-betwe
 const root=document.documentElement;const toggle=document.querySelector('[data-theme-toggle]');let theme=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';root.setAttribute('data-theme',theme);function renderThemeIcon(){toggle.innerHTML=theme==='dark'?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';toggle.setAttribute('aria-label',theme==='dark'?'Passa al tema chiaro':'Passa al tema scuro')} renderThemeIcon(); toggle.addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';root.setAttribute('data-theme',theme);renderThemeIcon();});
 const cards=document.querySelectorAll('#needCards .need-card'); const dynamicTitle=document.getElementById('dynamicTitle'); const dynamicText=document.getElementById('dynamicText'); const dynamicCta=document.getElementById('dynamicCta'); cards.forEach(card=>card.addEventListener('click',()=>{cards.forEach(c=>c.classList.remove('active')); card.classList.add('active'); dynamicTitle.textContent=card.dataset.title; dynamicText.textContent=card.dataset.text; dynamicCta.textContent=card.dataset.cta;}));
 document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.closest('.faq-item'); const isOpen=item.classList.contains('open'); item.classList.toggle('open'); btn.setAttribute('aria-expanded', String(!isOpen));});});
+</script>
+
+<script>
+(function(){
+  const newsGrid = document.getElementById('news-grid');
+  if (!newsGrid) return;
+
+  const FALLBACK_NEWS = [
+    {
+      title: 'Nuovi approfondimenti su ansia, stress e relazioni',
+      excerpt: 'Aggiornamenti sui nuovi articoli pubblicati e sui temi affrontati più di recente all'interno del sito, per orientarsi con maggiore chiarezza tra i contenuti disponibili.',
+      date: ''
+    },
+    {
+      title: 'Contenuti brevi per orientarsi meglio',
+      excerpt: 'Comunicazioni sintetiche, riflessioni essenziali e aggiornamenti legati all'attività professionale e ai percorsi di supporto.',
+      date: ''
+    }
+  ];
+
+  const monthNames = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+
+  function formatDate(value){
+    if (!value) return '';
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return '';
+    return d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function escapeHtml(str){
+    return String(str || '').replace(/[&<>"']/g, function(char){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]);
+    });
+  }
+
+  function markdownToText(md){
+    return String(md || '')
+      .replace(/^---[\s\S]*?---/, '')
+      .replace(/^#\s+/gm, '')
+      .replace(/\*\*(.*?)\*\*/g, '$1')
+      .replace(/\*(.*?)\*/g, '$1')
+      .replace(/!\[(.*?)\]\((.*?)\)/g, '$1')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+      .replace(/`{1,3}(.*?)`{1,3}/g, '$1')
+      .replace(/
++/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function parseFrontmatter(raw){
+    const match = raw.match(/^---
+([\s\S]*?)
+---
+?([\s\S]*)$/);
+    if (!match) return { data: {}, body: raw };
+    const yaml = match[1];
+    const body = match[2];
+    const data = {};
+    yaml.split(/
+/).forEach(function(line){
+      const idx = line.indexOf(':');
+      if (idx === -1) return;
+      const key = line.slice(0, idx).trim();
+      let value = line.slice(idx + 1).trim();
+      value = value.replace(/^['"]|['"]$/g, '');
+      data[key] = value;
+    });
+    return { data: data, body: body };
+  }
+
+  function slugToTitle(slug){
+    return slug.replace(/[-_]/g, ' ').replace(/\w/g, function(c){ return c.toUpperCase(); });
+  }
+
+  function render(items){
+    if (!items || !items.length){
+      items = FALLBACK_NEWS;
+    }
+
+    newsGrid.innerHTML = items.map(function(item){
+      const title = escapeHtml(item.title || 'Aggiornamento');
+      const excerpt = escapeHtml(item.excerpt || 'Nuovo contenuto disponibile.');
+      const date = item.date ? '<p class="microcopy" style="margin-top:.8rem;color:var(--faint);">' + escapeHtml(formatDate(item.date)) + '</p>' : '';
+      return '' +
+        '<article class="card news-card">' +
+          '<span class="meta-label">Aggiornamenti</span>' +
+          '<h3>' + title + '</h3>' +
+          '<p>' + excerpt + '</p>' +
+          date +
+        '</article>';
+    }).join('');
+  }
+
+  async function fetchText(path){
+    const response = await fetch(path, { cache: 'no-store' });
+    if (!response.ok) throw new Error('Errore nel caricamento di ' + path);
+    return await response.text();
+  }
+
+  async function loadNews(){
+    try {
+      const configRaw = await fetchText('./admin/config.yml');
+      const fileMatches = [...configRaw.matchAll(/content\/news\/[^
+"']+\.md/g)].map(function(m){ return './' + m[0]; });
+      const uniqueFiles = Array.from(new Set(fileMatches));
+
+      if (!uniqueFiles.length){
+        render(FALLBACK_NEWS);
+        return;
+      }
+
+      const posts = await Promise.all(uniqueFiles.map(async function(path){
+        try {
+          const raw = await fetchText(path);
+          const parsed = parseFrontmatter(raw);
+          const title = parsed.data.title || slugToTitle(path.split('/').pop().replace(/\.md$/i, ''));
+          const excerpt = parsed.data.excerpt || markdownToText(parsed.body).slice(0, 180) + (markdownToText(parsed.body).length > 180 ? '…' : '');
+          const date = parsed.data.date || '';
+          return { title: title, excerpt: excerpt, date: date };
+        } catch (error) {
+          return null;
+        }
+      }));
+
+      const cleaned = posts.filter(Boolean).sort(function(a, b){
+        return new Date(b.date || 0) - new Date(a.date || 0);
+      }).slice(0, 6);
+
+      render(cleaned);
+    } catch (error) {
+      render(FALLBACK_NEWS);
+    }
+  }
+
+  loadNews();
+})();
 </script>
 </body>
 </html>
