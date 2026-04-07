@@ -1,7 +1,12 @@
 backend:
-  name: github
+  name: git-gateway
   repo: dariosancataldo/annalisaparadiso-site
   branch: main
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/33b9ac21-3335-43c4-a389-5b51430a8612/pkce
+  auth_token_endpoint: /sites/33b9ac21-3335-43c4-a389-5b51430a8612/token
+  gateway_url: https://gateway.decapbridge.com
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
