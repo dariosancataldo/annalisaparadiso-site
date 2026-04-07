@@ -3,115 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il lutto e la perdita - Annalisa Paradiso</title>
-    <meta name="description" content="Elaborare un lutto richiede tempo, rispetto per il proprio dolore e il coraggio di chiedere supporto quando serve. Non esiste un modo giusto per affrontare la perdita.">
+    <title>Il lutto e la perdita | Blog Annalisa Paradiso</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../index.html#styles">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Manrope', sans-serif; line-height: 1.7; color: #2d3748; background: linear-gradient(135deg, #fdfbfb 0%, #f7f4f0 100%); }
-        .site-header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: #2d3748; text-decoration: none; }
-        .btn { padding: 0.5rem 1.25rem; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 500; }
-        .btn-secondary { background: transparent; color: #4a5568; border: 1px solid #e2e8f0; }
-        .article-hero { position: relative; height: 400px; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1600&h=800&fit=crop') center/cover; display: flex; align-items: flex-end; margin-bottom: 3rem; }
-        .hero-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; color: white; width: 100%; }
-        .article-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 0.9rem; }
-        .article-title { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
-        .article-excerpt { font-size: 1.15rem; opacity: 0.95; max-width: 600px; }
-        .article-content { max-width: 800px; margin: 0 auto; padding: 2rem; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .article-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin: 2rem 0 1rem; color: #1a202c; }
-        .article-content p { margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.8; }
-        .article-content ul { margin: 1.5rem 0; padding-left: 1.5rem; }
-        .article-content li { margin-bottom: 0.75rem; font-size: 1.05rem; }
-        .article-content strong { font-weight: 600; color: #1a202c; }
-        .highlight-box { background: #f7f4f0; border-left: 4px solid #d4a574; padding: 1.5rem; margin: 2rem 0; border-radius: 8px; }
-        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #4a5568; text-decoration: none; font-weight: 500; margin: 3rem auto; padding: 0.75rem 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        :root,[data-theme="light"]{--text-xs:clamp(.75rem,.7rem + .25vw,.875rem);--text-sm:clamp(.875rem,.8rem + .35vw,1rem);--text-base:clamp(1rem,.95rem + .25vw,1.08rem);--text-lg:clamp(1.125rem,1rem + .75vw,1.45rem);--text-xl:clamp(1.55rem,1.2rem + 1.25vw,2.2rem);--bg:#fcf8fc;--surface:#ffffff;--text:#2e2332;--muted:#6e6376;--primary:#8d6db1;--font-display:'Cormorant Garamond',serif;--font-body:'Manrope',sans-serif;--content:800px}
+        body{margin:0;font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.8}
+        .container{width:min(calc(100% - 2rem),var(--content));margin-inline:auto}
+        .article-hero{height:50vh;min-height:400px;background:url('https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?w=1600&q=80') center/cover no-repeat;display:grid;place-items:center;position:relative}
+        .article-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, transparent, rgba(0,0,0,0.4))}
+        .hero-content{position:relative;z-index:2;text-align:center;color:white;padding:2rem}
+        .hero-content h1{font-family:var(--font-display);font-size:var(--text-xl);margin:0}
+        .article-main{padding:4rem 0}
+        .btn-back{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:2rem;color:var(--primary);font-weight:600}
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="../index.html" class="brand">Annalisa Paradiso</a>
-            <div class="nav-actions">
-                <a href="../index.html" class="btn btn-secondary">← Torna al sito</a>
-            </div>
+    <div class="article-hero">
+        <div class="hero-content">
+            <h1>Il lutto e la perdita: attraversare il dolore</h1>
         </div>
-    </header>
-
-    <article>
-        <div class="article-hero">
-            <div class="hero-content">
-                <div class="article-meta">
-                    <span>📅 8 min di lettura</span>
-                    <span>🏷️ Lutto</span>
-                </div>
-                <h1 class="article-title">Il lutto e la perdita: attraversare il dolore senza restarne prigionieri</h1>
-                <p class="article-excerpt">Elaborare un lutto richiede tempo, rispetto per il proprio dolore e il coraggio di chiedere supporto quando serve. Non esiste un modo giusto per affrontare la perdita.</p>
-            </div>
-        </div>
-
-        <div class="article-content">
-            <p>Il <strong>lutto</strong> è una delle esperienze più universalmente umane: tutti, prima o poi, facciamo i conti con la perdita. La morte di una persona cara, la fine di una relazione importante, la perdita di un lavoro o di un progetto di vita — ogni perdita porta con sé dolore, disorientamento e la necessità di riorganizzare la propria esistenza.</p>
-
-            <h2>Le fasi del lutto</h2>
-            <p>Elisabeth Kübler-Ross ha descritto cinque fasi del lutto diventate ormai un riferimento culturale: negazione, rabbia, contrattazione, depressione e accettazione. È importante però chiarire che queste <strong>non sono tappe obbligatorie</strong> da attraversare in sequenza.</p>
-
-            <p>Il lutto è un processo profondamente individuale. Alcune persone sperimentano tutte le fasi, altre solo alcune, in ordine diverso o in modo sovrapposto. Non esiste un modo "corretto" di fare il lutto.</p>
-
-            <div class="highlight-box">
-                <p><strong>Alcune delle emozioni più comuni nel lutto:</strong></p>
-                <ul>
-                    <li>Tristezza profonda e pianto</li>
-                    <li>Incredulità e senso di irrealtà</li>
-                    <li>Rabbia verso chi è partito, verso se stessi, verso Dio</li>
-                    <li>Senso di colpa ("avrei potuto fare di più")</li>
-                    <li>Solitudine e isolamento</li>
-                    <li>Sensazione di vuoto e mancanza di senso</li>
-                    <li>A volte: sollievo, soprattutto dopo una lunga malattia</li>
-                </ul>
-            </div>
-
-            <h2>Il lutto complicato</h2>
-            <p>La maggior parte delle persone riesce ad elaborare il lutto nel tempo, con il supporto di amici, familiari e della propria rete sociale. Tuttavia, per alcune persone il lutto può diventare <strong>complicato o patologico</strong>: il dolore non diminuisce con il tempo, ma si intensifica o si cronicizza, impedendo di riprendere una vita significativa.</p>
-
-            <p>Alcuni segnali che possono indicare un lutto complicato:</p>
-            <ul>
-                <li>Dolore intenso che non diminuisce dopo molti mesi</li>
-                <li>Incapacità di accettare la realtà della perdita</li>
-                <li>Isolamento sociale prolungato</li>
-                <li>Difficoltà a parlare di chi è andato senza sprofondare nel dolore</li>
-                <li>Pensieri ricorrenti di voler morire per ricongiungersi alla persona perduta</li>
-                <li>Incapacità di provare piacere in qualsiasi attività</li>
-            </ul>
-
-            <h2>Come attraversare il dolore del lutto</h2>
-            <p>Non esiste una formula magica per il lutto. Ma ci sono alcune cose che possono aiutare:</p>
-
-            <div class="highlight-box">
-                <ul>
-                    <li><strong>Permettersi di sentire:</strong> il dolore del lutto è naturale. Sopprimerlo non lo fa scomparire</li>
-                    <li><strong>Non isolarsi:</strong> accettare il supporto di chi ci vuole bene</li>
-                    <li><strong>Rispettare i propri tempi:</strong> non esiste una tabella di marcia per il dolore</li>
-                    <li><strong>Creare rituali:</strong> commemorare la persona o la cosa perduta può aiutare nell'elaborazione</li>
-                    <li><strong>Prendersi cura di sé:</strong> dormire, mangiare e muoversi aiutano il processo di elaborazione</li>
-                    <li><strong>Cercare supporto professionale:</strong> se il dolore diventa insostenibile</li>
-                </ul>
-            </div>
-
-            <h2>Quando chiedere aiuto</h2>
-            <p>La psicoterapia può essere un prezioso alleato nel processo di lutto. Un terapeuta offre uno spazio sicuro dove poter portare il dolore senza il timore di pesare sugli altri, dove esplorare i sentimenti più difficili (come la rabbia o il senso di colpa) e dove trovare nuovi modi per stare in relazione con la memoria della persona perduta.</p>
-
-            <p>Chiedere aiuto per un lutto non significa essere deboli o incapaci. Significa <strong>prendersi cura di se stessi</strong> in uno dei momenti più difficili della vita.</p>
-
-            <h2>Il lutto come trasformazione</h2>
-            <p>Attraversare il lutto non significa "dimenticare" o "superare" la perdita. Significa trovare un modo per portare avanti la relazione con chi non c'è più, integrando la perdita nella propria storia di vita.</p>
-
-            <p>Molte persone, dopo aver attraversato un lutto, scoprono in sé <strong>risorse e capacità</strong> che non sapevano di avere. Il dolore può diventare, nel tempo, un maestro di vita — non il maestro che avremmo scelto, ma uno dei più profondi.</p>
-
-            <a href="index.html" class="back-link">← Torna al blog</a>
+    </div>
+    <article class="article-main">
+        <div class="container">
+            <a href="index.html" class="btn-back">← Torna al blog</a>
+            <p>Elaborare un lutto richiede tempo, rispetto per il proprio dolore e il coraggio di chiedere supporto quando serve. Non esiste un modo "giusto" o un tempo prestabilito per vivere la perdita.</p>
+            <h2>Le fasi del dolore</h2>
+            <p>Il dolore per una perdita non è un percorso lineare. Si alternano momenti di negazione, rabbia, tristezza profonda e, infine, una lenta accettazione. Ogni persona attraversa queste fasi con i propri tempi e le proprie modalità.</p>
+            <h2>Ricostruire il senso</h2>
+            <p>La terapia del lutto non mira a "dimenticare", ma a integrare la perdita nella propria storia di vita. È un percorso per onorare ciò che è stato e trovare, con pazienza, il modo di tornare ad abitare il presente.</p>
         </div>
     </article>
 </body>
