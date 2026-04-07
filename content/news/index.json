@@ -1,0 +1,12 @@
+[
+  {
+    "title": "News di prova 2",
+    "excerpt": "Seconda news di prova pubblicata dal CMS per verificare il corretto collegamento tra GitHub, Netlify e la sezione News del sito.",
+    "date": "2026-04-07"
+  },
+  {
+    "title": "News di prova",
+    "excerpt": "Prima news di prova inserita tramite il pannello admin, utile per controllare che gli aggiornamenti compaiano automaticamente nella home page.",
+    "date": "2026-04-07"
+  }
+]
