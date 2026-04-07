@@ -3,110 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dipendenza affettiva - Annalisa Paradiso</title>
-    <meta name="description" content="La dipendenza affettiva non è amore: è un legame che imprigiona. Riconoscere i segnali può essere il primo passo verso la libertà e relazioni più sane.">
+    <title>Dipendenza affettiva | Blog Annalisa Paradiso</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../index.html#styles">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Manrope', sans-serif; line-height: 1.7; color: #2d3748; background: linear-gradient(135deg, #fdfbfb 0%, #f7f4f0 100%); }
-        .site-header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: #2d3748; text-decoration: none; }
-        .btn { padding: 0.5rem 1.25rem; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; }
-        .btn-secondary { background: transparent; color: #4a5568; border: 1px solid #e2e8f0; }
-        .article-hero { position: relative; height: 400px; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1494548162494-384bba4ab999?w=1600&h=800&fit=crop') center/cover; display: flex; align-items: flex-end; margin-bottom: 3rem; }
-        .hero-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; color: white; width: 100%; }
-        .article-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 0.9rem; }
-        .article-title { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
-        .article-excerpt { font-size: 1.15rem; opacity: 0.95; max-width: 600px; }
-        .article-content { max-width: 800px; margin: 0 auto; padding: 2rem; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .article-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin: 2rem 0 1rem; color: #1a202c; }
-        .article-content p { margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.8; }
-        .article-content ul { margin: 1.5rem 0; padding-left: 1.5rem; }
-        .article-content li { margin-bottom: 0.75rem; font-size: 1.05rem; }
-        .article-content strong { font-weight: 600; color: #1a202c; }
-        .highlight-box { background: #f7f4f0; border-left: 4px solid #d4a574; padding: 1.5rem; margin: 2rem 0; border-radius: 8px; }
-        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #4a5568; text-decoration: none; font-weight: 500; margin: 3rem auto; padding: 0.75rem 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        :root,[data-theme="light"]{--text-xs:clamp(.75rem,.7rem + .25vw,.875rem);--text-sm:clamp(.875rem,.8rem + .35vw,1rem);--text-base:clamp(1rem,.95rem + .25vw,1.08rem);--text-lg:clamp(1.125rem,1rem + .75vw,1.45rem);--text-xl:clamp(1.55rem,1.2rem + 1.25vw,2.2rem);--bg:#fcf8fc;--surface:#ffffff;--text:#2e2332;--muted:#6e6376;--primary:#8d6db1;--font-display:'Cormorant Garamond',serif;--font-body:'Manrope',sans-serif;--content:800px}
+        body{margin:0;font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.8}
+        .container{width:min(calc(100% - 2rem),var(--content));margin-inline:auto}
+        .article-hero{height:50vh;min-height:400px;background:url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1600&q=80') center/cover no-repeat;display:grid;place-items:center;position:relative}
+        .article-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, transparent, rgba(0,0,0,0.4))}
+        .hero-content{position:relative;z-index:2;text-align:center;color:white;padding:2rem}
+        .hero-content h1{font-family:var(--font-display);font-size:var(--text-xl);margin:0}
+        .article-main{padding:4rem 0}
+        .btn-back{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:2rem;color:var(--primary);font-weight:600}
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="../index.html" class="brand">Annalisa Paradiso</a>
-            <div class="nav-actions">
-                <a href="../index.html" class="btn btn-secondary">← Torna al sito</a>
-            </div>
+    <div class="article-hero">
+        <div class="hero-content">
+            <h1>Dipendenza affettiva: quando l'amore diventa sofferenza</h1>
         </div>
-    </header>
-
-    <article>
-        <div class="article-hero">
-            <div class="hero-content">
-                <div class="article-meta">
-                    <span>📅 7 min di lettura</span>
-                    <span>🏷️ Relazioni</span>
-                </div>
-                <h1 class="article-title">Dipendenza affettiva: quando l'amore diventa sofferenza</h1>
-                <p class="article-excerpt">La dipendenza affettiva non è amore: è un legame che imprigiona. Riconoscere i segnali può essere il primo passo verso la libertà.</p>
-            </div>
-        </div>
-
-        <div class="article-content">
-            <p>La <strong>dipendenza affettiva</strong> è una delle forme di sofferenza emotiva più diffuse e, allo stesso tempo, meno riconosciute. Chi ne soffre spesso non si rende conto di vivere in una relazione disfunzionale, confondendo l'attaccamento patologico con l'amore autentico.</p>
-
-            <h2>Cos'è la dipendenza affettiva?</h2>
-            <p>La dipendenza affettiva è un <strong>bisogno compulsivo di essere in relazione</strong> con un'altra persona, al punto da sacrificare la propria identità, i propri bisogni e il proprio benessere per mantenere il legame.</p>
-            <p>Non è semplicemente "voler stare con qualcuno". È il terrore paralizzante di perderlo. È sentirsi incompleti senza la presenza dell'altro. È costruire la propria esistenza attorno a un'altra persona.</p>
-
-            <div class="highlight-box">
-                <p><strong>Segnali tipici della dipendenza affettiva:</strong></p>
-                <ul>
-                    <li>Paura intensa di essere abbandonati/e</li>
-                    <li>Tendenza a trascurare amici, famiglia e interessi personali</li>
-                    <li>Accettare comportamenti scorretti pur di non perdere il partner</li>
-                    <li>Sensazione di non valere nulla senza l'approvazione dell'altro</li>
-                    <li>Gelosia eccessiva e bisogno continuo di rassicurazioni</li>
-                    <li>Difficoltà a prendere decisioni autonomamente</li>
-                    <li>Rimpianti costanti e tentativi ripetuti di tornare da ex partner</li>
-                </ul>
-            </div>
-
-            <h2>Le radici della dipendenza affettiva</h2>
-            <p>La dipendenza affettiva ha spesso radici profonde nell'infanzia. Si sviluppa frequentemente in persone che hanno vissuto:</p>
-            <ul>
-                <li><strong>Attaccamento insicuro</strong> con le figure genitoriali</li>
-                <li><strong>Trascuratezza emotiva</strong> o iperprotettività</li>
-                <li><strong>Relazioni familiari instabili</strong> o violente</li>
-                <li><strong>Bassa autostima</strong> e senso di inadeguatezza</li>
-                <li><strong>Esperienze di abbandono</strong> reale o percepito</li>
-            </ul>
-
-            <h2>La differenza tra amore e dipendenza</h2>
-            <p>L'amore sano si basa sulla <strong>libera scelta</strong>: si sceglie di stare insieme perché si è felici insieme, non perché si ha paura di stare soli. Nella dipendenza affettiva, invece, il legame è tenuto in vita dalla <strong>paura</strong>: paura della solitudine, del rifiuto, dell'abbandono.</p>
-
-            <p>L'amore autentico rispetta i confini e accresce l'autonomia di entrambi. La dipendenza li erode progressivamente, fino a creare una fusione in cui non si sa più chi si è al di fuori della relazione.</p>
-
-            <h2>Come uscire dalla dipendenza affettiva</h2>
-            <p>Uscire da una dipendenza affettiva non è semplice. Richiede tempo, pazienza e spesso il supporto di uno psicoterapeuta. Il percorso include:</p>
-            <ul>
-                <li><strong>Riconoscere il problema:</strong> il primo e più importante passo</li>
-                <li><strong>Lavorare sull'autostima:</strong> imparare a sentirsi degni/e di amore anche senza un partner</li>
-                <li><strong>Esplorare le radici:</strong> comprendere da dove vengono questi schemi relazionali</li>
-                <li><strong>Ricostruire l'identità:</strong> riscoprire i propri interessi, valori e obiettivi</li>
-                <li><strong>Imparare a tollerare la solitudine:</strong> trasformarla in spazio per la crescita personale</li>
-            </ul>
-
-            <div class="highlight-box">
-                <p><strong>Ricorda:</strong> chiedere aiuto non è debolezza. La dipendenza affettiva è un disturbo che risponde bene alla psicoterapia. Con il supporto giusto, è possibile costruire relazioni autentiche, basate sulla libertà e sul rispetto reciproco.</p>
-            </div>
-
-            <h2>Un passo alla volta verso la libertà</h2>
-            <p>Se ti riconosci in queste descrizioni, sappi che <strong>non sei solo/a</strong> e che puoi cambiare. La psicoterapia offre uno spazio sicuro per esplorare i propri schemi relazionali, comprenderne le origini e costruire nuovi modi di stare in relazione con se stessi e con gli altri.</p>
-            <p>La libertà emotiva è possibile. E inizia dal coraggio di chiedere aiuto.</p>
-
-            <a href="index.html" class="back-link">← Torna al blog</a>
+    </div>
+    <article class="article-main">
+        <div class="container">
+            <a href="index.html" class="btn-back">← Torna al blog</a>
+            <p>La dipendenza affettiva non è amore: è un legame che imprigiona e che spesso si nutre di insicurezze e paure profonde. Riconoscere i segnali può essere il primo passo verso la libertà emotiva.</p>
+            <h2>Riconoscere il legame tossico</h2>
+            <p>Quando il benessere dell'altro diventa l'unica priorità, a discapito dei propri bisogni e della propria dignità, ci troviamo di fronte a una dinamica di dipendenza. La paura dell'abbandono diventa il motore che spinge a sopportare sofferenze e mancanze di rispetto.</p>
+            <h2>Il percorso di guarigione</h2>
+            <p>Uscire da una dipendenza affettiva significa innanzitutto ricominciare a guardarsi con amore e rispetto. In psicoterapia lavoriamo per ricostruire l'autostima e per imparare a creare legami basati sulla reciprocità e sulla libertà, anziché sul bisogno.</p>
         </div>
     </article>
 </body>
