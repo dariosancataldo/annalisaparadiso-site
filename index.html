@@ -115,6 +115,17 @@ section{padding:4.5rem 0} .section-head{display:flex;justify-content:space-betwe
   --shadow-cta-hover:0 16px 36px rgba(88,53,118,.2),0 1px 0 rgba(255,255,255,.52) inset;
   --shadow-cta-active:0 6px 12px rgba(88,53,118,.16),0 1px 0 rgba(255,255,255,.38) inset;
 }
+html{
+  scroll-padding-top:6.1rem;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+body{
+  overscroll-behavior-y:none;
+}
+[id]{
+  scroll-margin-top:6.3rem;
+}
 .hero{
   isolation:isolate;
   background:
@@ -212,6 +223,8 @@ section:nth-of-type(odd):not(.hero)::before{
   position:relative;
   overflow:hidden;
   transform:translateZ(0);
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
   transition:
     transform var(--duration-fast) var(--ease-lift),
     box-shadow var(--duration-mid) var(--ease-premium),
@@ -327,6 +340,33 @@ a.btn.btn-primary::after,a.btn.btn-secondary::after{
 .reveal-line.is-visible::after{
   transform:scaleX(1);
 }
+.professional-credentials{
+  display:grid;
+  gap:.7rem;
+  background:linear-gradient(145deg, color-mix(in srgb,var(--surface) 92%, transparent), color-mix(in srgb,var(--primary-soft) 58%, var(--surface)));
+}
+.professional-credentials h3{
+  margin-bottom:.1rem;
+}
+.credential-item{
+  display:grid;
+  gap:.15rem;
+  padding:.8rem .9rem;
+  border-radius:var(--radius-md);
+  border:1px solid color-mix(in srgb,var(--primary) 24%, var(--border));
+  background:color-mix(in srgb,var(--surface) 84%, transparent);
+}
+.credential-item strong{
+  font-size:var(--text-xs);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--primary-deep);
+}
+.credential-item span{
+  font-size:var(--text-sm);
+  color:var(--text);
+  font-weight:700;
+}
 @keyframes buttonSheen{
   0%{transform:translateX(-110%);opacity:0;}
   20%{opacity:.52;}
@@ -336,9 +376,45 @@ a.btn.btn-primary::after,a.btn.btn-secondary::after{
   to{opacity:0;transform:translate(-50%,-50%) scale(20);}
 }
 @media (max-width:720px){
+  :root{
+    --duration-fast:150ms;
+    --duration-mid:260ms;
+    --duration-slow:440ms;
+  }
+  html{
+    scroll-padding-top:8.2rem;
+  }
+  body{
+    overflow-x:hidden;
+  }
+  [id]{
+    scroll-margin-top:8.4rem;
+  }
+  main{
+    overflow-x:clip;
+  }
+  section{
+    content-visibility:auto;
+    contain-intrinsic-size:1px 860px;
+  }
   .btn{min-height:50px;padding:1rem 1.08rem;}
   .contact-card .hero-actions .btn{width:100%;}
   .section-head h2::after{width:2.6rem;}
+  .card{
+    box-shadow:0 10px 24px rgba(70,44,96,.11);
+  }
+  .hero-card::before,.cta-band::before,.contact-card::before,.form-shell::before,.dynamic-box::before{
+    opacity:.26;
+  }
+  .floating-actions{
+    bottom:max(1rem,env(safe-area-inset-bottom));
+  }
+  .professional-credentials{
+    gap:.55rem;
+  }
+  .credential-item{
+    padding:.72rem .82rem;
+  }
 }
 @media (prefers-reduced-motion: reduce){
   .reveal-up{opacity:1;transform:none;}
@@ -415,6 +491,7 @@ a.btn.btn-primary::after,a.btn.btn-secondary::after{
       <div class="section-head"><div><h2>Chi sono</h2></div><p>Accolgo ogni persona a partire dalla sua storia e dal suo ritmo, con un metodo professionale e una presenza autentica.</p></div>
       <article class="card bio-card"><span class="meta-label">Profilo professionale</span><h3>Un lavoro clinico orientato all'ascolto</h3><p>Sono psicologa clinica e psicoterapeuta psicoanalitica. Nel percorso terapeutico propongo uno spazio serio, umano e rispettoso, in cui sentirsi ascoltati senza dover trovare subito le parole perfette.</p></article>
       <article class="card bio-card"><span class="meta-label">Affidabilità e trasparenza</span><h3>Primo passo chiaro, senza pressioni</h3><p>Il primo colloquio serve anche a capire insieme se e come iniziare. La gradualità, la riservatezza e la qualità della relazione terapeutica restano centrali in ogni fase del lavoro.</p></article>
+      <article class="card bio-card professional-credentials"><span class="meta-label">Dati professionali</span><h3>Riferimenti iscrizione e fiscali</h3><div class="credential-item"><strong>N° Iscrizione O.P.R.S.</strong><span>10819 Sez. A</span></div><div class="credential-item"><strong>P.IVA</strong><span>02117310850</span></div></article>
     </div>
     <aside class="card soft-quote"><strong>Un modo semplice per dire ciò che faccio</strong><p>Offro uno spazio in cui fermarsi, ascoltarsi e comprendere meglio il momento che si sta attraversando, senza giudizio e senza fretta.</p><p style="margin-top:1rem;">Ricevo in presenza tra San Cataldo, Caltanissetta e Santa Caterina Villarmosa, oltre che online.</p></aside>
   </div>
@@ -598,10 +675,11 @@ document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('c
 <script>
 (()=>{
   const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobileViewport=window.matchMedia('(max-width: 720px)').matches;
   const revealTargets=document.querySelectorAll('.hero .hero-grid > div:first-child, .hero-card, .need-card, .step-card, .value-card, .blog-card, .news-card, .bio-card, .contact-card, .form-shell, .cta-band, .section-head h2');
   revealTargets.forEach((el, index)=>{
     el.classList.add('reveal-up');
-    el.style.transitionDelay=`${Math.min(index*28,220)}ms`;
+    el.style.transitionDelay=`${Math.min(index*(mobileViewport?18:28),mobileViewport?160:220)}ms`;
   });
   document.querySelectorAll('.section-head h2').forEach(el=>el.classList.add('reveal-line'));
   if(!reduceMotion && 'IntersectionObserver' in window){
@@ -612,7 +690,7 @@ document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('c
           observer.unobserve(entry.target);
         }
       });
-    },{threshold:.18,rootMargin:'0px 0px -8% 0px'});
+    },{threshold:mobileViewport ? .1 : .18,rootMargin:mobileViewport?'0px 0px -5% 0px':'0px 0px -8% 0px'});
     revealTargets.forEach(el=>observer.observe(el));
   }else{
     revealTargets.forEach(el=>el.classList.add('is-visible'));
@@ -632,12 +710,21 @@ document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('c
     const parallaxMedia=window.matchMedia('(min-width: 960px)');
     const parallaxItems=document.querySelectorAll('.photo-wrap img, .news-card img');
     if(parallaxMedia.matches){
+      let rafId=null;
       window.addEventListener('scroll',()=>{
-        const drift=Math.min(window.scrollY*0.028,18);
-        parallaxItems.forEach((item, idx)=>{
-          item.style.transform=`translateY(${(idx%2===0?1:-1)*drift}px) scale(1.04)`;
+        if(rafId!==null) return;
+        rafId=window.requestAnimationFrame(()=>{
+          const drift=Math.min(window.scrollY*0.028,18);
+          parallaxItems.forEach((item, idx)=>{
+            item.style.transform=`translateY(${(idx%2===0?1:-1)*drift}px) scale(1.04)`;
+          });
+          rafId=null;
         });
       },{passive:true});
+    }else{
+      parallaxItems.forEach(item=>{
+        item.style.transform='none';
+      });
     }
   }
 })();
