@@ -17,6 +17,7 @@ npm run ai:publish-pr
 npm run ai:preflight
 npm run ai:run
 npm run ai:test-live
+npm run ai:weekly
 ```
 
 ## Struttura
@@ -76,6 +77,40 @@ AI_RUN_MODE=draft-pr DRY_RUN=false AI_ALLOW_GITHUB_PUSH=true AI_PREFLIGHT_NETWOR
 
 Il preflight verifica env vars, accesso OpenAI, accesso GitHub e configurazione di sicurezza. `NETLIFY_BUILD_HOOK_URL` resta un secret server-side e non viene mai stampato.
 
+## Modalita Weekly con Ultima Parola Umana
+
+`npm run ai:weekly` e pensato per Railway cron o job esterni. Ogni settimana:
+
+- pianifica per default 1 approfondimento e 1 news;
+- rispetta `AI_WEEKLY_MAX_TOTAL`;
+- alterna i pillar editoriali centrali;
+- genera bozze;
+- esegue SafetyAgent + controlli deterministici;
+- esegue EditorAgent;
+- crea branch, commit e draft PR;
+- scrive `logs/editorial/weekly-YYYY-MM-DD-summary.json`;
+- non fa merge;
+- non triggera Netlify.
+
+Comando schedulabile:
+
+```bash
+npm run ai:weekly
+```
+
+Env principali:
+
+- `AI_PROFILE=weekly-draft-pr`
+- `AI_WEEKLY_SCHEDULE_ENABLED=true`
+- `AI_WEEKLY_ARTICLES=1`
+- `AI_WEEKLY_NEWS=1`
+- `AI_WEEKLY_MAX_TOTAL=3`
+- `DRY_RUN=false`
+- `AI_ALLOW_GITHUB_PUSH=true`
+- `AI_ALLOW_NETLIFY_BUILD_HOOK=false`
+
+Flusso end-to-end: cron Railway -> AI genera bozze -> draft PR aperte -> umano revisiona e mergea -> Netlify deploya dopo merge sul branch configurato.
+
 ## Deploy
 
 Netlify usa:
@@ -95,3 +130,4 @@ Checklist manuale: `docs/manual-deploy-checklist.md`.
 - `docs/agent-schemas.md`
 - `docs/production-rollout.md`
 - `docs/go-live-checklist.md`
+- `docs/human-review-flow.md`

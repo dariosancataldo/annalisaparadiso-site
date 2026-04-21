@@ -23,3 +23,5 @@ Rispetta `agents/schemas/editorial-plan.schema.json`.
 ## Istruzioni
 
 Il brief deve indicare bisogno del lettore, angolo, struttura, link interni e rischio. Non pianificare contenuti che promettono diagnosi o guarigione.
+
+Per la modalita settimanale, alterna i pillar nel tempo ed evita di ripetere lo stesso tema quando esistono alternative utili. Se il volume richiesto supera il limite settimanale, riduci il piano e privilegia contenuti people-first su bisogni reali.

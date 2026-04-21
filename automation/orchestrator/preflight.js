@@ -4,6 +4,11 @@ function missingEnv(name) {
   return !process.env[name] || String(process.env[name]).trim() === "";
 }
 
+function requireValue({ name, expected, actual, fail, pass }) {
+  if (actual !== expected) fail(name, `deve essere ${expected}. Valore attuale: ${actual || "(vuoto)"}.`);
+  else pass(name, `${expected}.`);
+}
+
 async function githubRequest(pathname, token) {
   const response = await fetch(`${config.github.apiBaseUrl}${pathname}`, {
     headers: {
@@ -28,7 +33,9 @@ async function openAiRequest() {
 
 async function runPreflight(options = {}) {
   const mode = options.mode || config.runMode;
-  const liveMode = mode !== "demo" || config.dryRun === false || config.github.allowPush;
+  const weeklyMode = config.profile === "weekly-draft-pr";
+  const weeklyLiveMode = weeklyMode && (mode !== "demo" || config.dryRun === false || config.github.allowPush);
+  const liveMode = weeklyLiveMode || mode !== "demo" || config.dryRun === false || config.github.allowPush;
   const network = options.network ?? process.env.AI_PREFLIGHT_NETWORK === "true";
   const errors = [];
   const warnings = [];
@@ -47,7 +54,17 @@ async function runPreflight(options = {}) {
   }
 
   if (liveMode) {
-    for (const name of ["OPENAI_API_KEY", "OPENAI_MODEL", "GITHUB_TOKEN", "GITHUB_OWNER", "GITHUB_REPO", "GITHUB_BRANCH"]) {
+    for (const name of [
+      "OPENAI_API_KEY",
+      "OPENAI_MODEL",
+      "GITHUB_TOKEN",
+      "GITHUB_OWNER",
+      "GITHUB_REPO",
+      "GITHUB_BRANCH",
+      "GITHUB_API_BASE_URL",
+      "SITE_URL",
+      "CONTENT_BASE_URL",
+    ]) {
       if (missingEnv(name)) fail(name, "variabile richiesta per test live controllato.");
       else pass(name, "configurata.");
     }
@@ -65,6 +82,29 @@ async function runPreflight(options = {}) {
     fail("AI_ALLOW_NETLIFY_BUILD_HOOK", "deve restare false durante i test contenuto AI.");
   } else {
     pass("AI_ALLOW_NETLIFY_BUILD_HOOK", "false: nessun deploy Netlify automatico.");
+  }
+
+  if (weeklyMode) {
+    if (!config.weekly.enabled) fail("AI_WEEKLY_SCHEDULE_ENABLED", "deve essere true per la modalita weekly-draft-pr.");
+    else pass("AI_WEEKLY_SCHEDULE_ENABLED", "true.");
+    if (config.profile !== "weekly-draft-pr") fail("AI_PROFILE", "deve essere weekly-draft-pr.");
+    else pass("AI_PROFILE", "weekly-draft-pr.");
+
+    if (weeklyLiveMode) {
+      requireValue({ name: "AI_RUN_MODE", expected: "draft-pr", actual: config.runMode, fail, pass });
+      requireValue({ name: "AI_PREFLIGHT_NETWORK", expected: "true", actual: process.env.AI_PREFLIGHT_NETWORK || "", fail, pass });
+      if (!Number.isFinite(config.weekly.articles) || config.weekly.articles < 0) fail("AI_WEEKLY_ARTICLES", "deve essere un numero >= 0.");
+      else pass("AI_WEEKLY_ARTICLES", String(config.weekly.articles));
+      if (!Number.isFinite(config.weekly.news) || config.weekly.news < 0) fail("AI_WEEKLY_NEWS", "deve essere un numero >= 0.");
+      else pass("AI_WEEKLY_NEWS", String(config.weekly.news));
+      if (!Number.isFinite(config.weekly.maxTotal) || config.weekly.maxTotal < 1) fail("AI_WEEKLY_MAX_TOTAL", "deve essere un numero >= 1.");
+      else pass("AI_WEEKLY_MAX_TOTAL", String(config.weekly.maxTotal));
+      if (config.weekly.articles + config.weekly.news > config.weekly.maxTotal) {
+        warn("AI_WEEKLY_VOLUME", "articles + news supera max_total: Planner/orchestrator ridurra il numero totale.");
+      } else {
+        pass("AI_WEEKLY_VOLUME", "entro il limite configurato.");
+      }
+    }
   }
 
   if (!config.netlifyBuildHookUrl) {

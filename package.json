@@ -17,7 +17,8 @@
     "ai:publish-pr": "node automation/cli/publish-pr.js",
     "ai:preflight": "node automation/cli/preflight.js",
     "ai:run": "node automation/orchestrator/run-once.js",
-    "ai:test-live": "AI_RUN_MODE=draft-pr DRY_RUN=false AI_ALLOW_GITHUB_PUSH=true AI_ALLOW_NETLIFY_BUILD_HOOK=false AI_PREFLIGHT_NETWORK=true node automation/orchestrator/run-once.js"
+    "ai:test-live": "AI_RUN_MODE=draft-pr DRY_RUN=false AI_ALLOW_GITHUB_PUSH=true AI_ALLOW_NETLIFY_BUILD_HOOK=false AI_PREFLIGHT_NETWORK=true node automation/orchestrator/run-once.js",
+    "ai:weekly": "AI_PROFILE=weekly-draft-pr AI_WEEKLY_SCHEDULE_ENABLED=true AI_RUN_MODE=draft-pr DRY_RUN=false AI_ALLOW_GITHUB_PUSH=true AI_ALLOW_NETLIFY_BUILD_HOOK=false AI_PREFLIGHT_NETWORK=true node automation/orchestrator/weekly.js"
   },
   "engines": {
     "node": ">=20"

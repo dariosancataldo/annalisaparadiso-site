@@ -6,8 +6,10 @@ function datePrefix(date = new Date()) {
   return new Date(date).toISOString().slice(0, 10);
 }
 
-function writeDraftMarkdown({ content, safetyResult, editorNotes, runId }) {
-  const draftsDir = path.join(ROOT, "content", "drafts");
+function writeDraftMarkdown({ content, safetyResult, editorNotes, runId, targetType = "drafts" }) {
+  const allowedTargets = new Set(["drafts", "approfondimenti", "news"]);
+  const safeTarget = allowedTargets.has(targetType) ? targetType : "drafts";
+  const draftsDir = path.join(ROOT, "content", safeTarget);
   ensureDir(draftsDir);
   const slug = slugify(content.slug || content.title);
   const filename = `${datePrefix(content.date)}-${slug}.md`;
@@ -33,7 +35,7 @@ function writeDraftMarkdown({ content, safetyResult, editorNotes, runId }) {
     editor_notes: (editorNotes || []).join(" | "),
   };
   fs.writeFileSync(filePath, stringifyFrontmatter(frontmatter, content.body));
-  return { filePath, filename, slug };
+  return { filePath, filename, slug, targetType: safeTarget };
 }
 
 module.exports = { writeDraftMarkdown };

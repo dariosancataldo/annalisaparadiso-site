@@ -9,13 +9,15 @@
 
 ## Automazione
 
-Il `PublisherAgent` puo proporre commit o trigger build solo quando:
+Il `PublisherAgent` puo proporre solo branch, commit e draft PR. Non puo mai fare merge, push diretto su `main`, pubblicazione diretta o trigger Netlify.
 
-- `status` e `approved` o `published`;
-- `risk_level` e `low`;
+- `status` resta `draft` o `review` per contenuti generati dall'AI;
+- `risk_level` e `low` o `medium`;
 - `SafetyAgent` non segnala violazioni;
 - esiste una revisione umana per contenuti clinici.
 
 Per `risk_level: medium`, il `PublisherAgent` puo preparare una pull request, ma non deve attivare pubblicazione diretta.
 
 Per `risk_level: high`, il `PublisherAgent` deve fermarsi e richiedere revisione clinica umana.
+
+Regola d'oro: AI prepara tutto fino alla draft PR; l'umano decide merge, pubblicazione e deploy.

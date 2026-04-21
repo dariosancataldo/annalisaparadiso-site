@@ -70,3 +70,24 @@ Questa checklist serve per passare da dry-run a produzione controllata senza att
 - [ ] Archivi e pagine contenuto raggiungibili.
 - [ ] Meta title, description e canonical corretti.
 - [ ] Nessun secret visibile nel frontend.
+
+## 9. Scheduler Railway ai:weekly
+
+- [ ] Creare job Railway con comando `npm run ai:weekly`.
+- [ ] Impostare `AI_PROFILE=weekly-draft-pr`.
+- [ ] Impostare `AI_WEEKLY_SCHEDULE_ENABLED=true`.
+- [ ] Impostare `AI_WEEKLY_ARTICLES=1`.
+- [ ] Impostare `AI_WEEKLY_NEWS=1`.
+- [ ] Impostare `AI_WEEKLY_MAX_TOTAL=3`.
+- [ ] Impostare `AI_RUN_MODE=draft-pr`.
+- [ ] Impostare `DRY_RUN=false`.
+- [ ] Impostare `AI_ALLOW_GITHUB_PUSH=true`.
+- [ ] Impostare `AI_ALLOW_NETLIFY_BUILD_HOOK=false`.
+- [ ] Impostare OpenAI e GitHub env vars.
+- [ ] Impostare `SITE_URL` e `CONTENT_BASE_URL`.
+- [ ] Impostare `AI_PREFLIGHT_NETWORK=true`.
+- [ ] Schedulare idealmente alle 07:00 Europe/Rome.
+- [ ] Cron expression consigliata: `0 7 * * 1`.
+- [ ] Verificare il lunedi mattina `logs/editorial/weekly-YYYY-MM-DD-summary.json`.
+- [ ] Verificare che siano state create solo draft PR.
+- [ ] Confermare che merge e deploy restino manuali.

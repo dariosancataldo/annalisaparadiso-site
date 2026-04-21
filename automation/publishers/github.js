@@ -78,10 +78,11 @@ async function createDraftPullRequest({ title, body, branch }) {
   return response.json();
 }
 
-async function publishDraftPr({ content, safetyResult, editorResult, draftPath, logPath, logger }) {
+async function publishDraftPr({ content, safetyResult, editorResult, draftPath, logPath, logger, extraPaths = [], branchLabel = "" }) {
   const slug = content.slug;
   const date = new Date().toISOString().slice(0, 10);
-  const branch = `ai-content/${date}-${slug}`;
+  const label = branchLabel ? `${branchLabel}-` : "";
+  const branch = `ai-content/${date}-${label}${slug}`;
   const title = `Bozza AI: ${content.title}`;
   const body = prBody({ content, safetyResult, editorResult, draftPath, logPath, dryRun: config.dryRun });
 
@@ -92,10 +93,15 @@ async function publishDraftPr({ content, safetyResult, editorResult, draftPath, 
       commit_message: `Add AI draft: ${content.title}`,
       pr_title: title,
       pr_body: body,
-      note: "No branch, commit, push or PR was created because DRY_RUN is true or AI_ALLOW_GITHUB_PUSH is not true.",
+      extra_paths: extraPaths.map(relative),
+      note: "No branch, commit, push or PR was created because DRY_RUN is true or AI_ALLOW_GITHUB_PUSH is not true. The pipeline never merges PRs and never triggers Netlify.",
     };
     logger.write({ phase: "PublisherAgent", status: "dry_run_completed", output: simulated });
     return simulated;
+  }
+
+  if (config.allowNetlifyBuildHook) {
+    throw new Error("PublisherAgent refused to continue because AI_ALLOW_NETLIFY_BUILD_HOOK=true. AI workflows must not trigger Netlify.");
   }
 
   if (safetyResult.outcome === "blocked") {
@@ -107,7 +113,8 @@ async function publishDraftPr({ content, safetyResult, editorResult, draftPath, 
 
   logger.write({ phase: "PublisherAgent", status: "branch_start", branch });
   runGit(["checkout", "-B", branch, config.github.branch]);
-  runGit(["add", relative(draftPath), relative(logPath)]);
+  const pathsToAdd = [draftPath, logPath, ...extraPaths].filter(Boolean).map(relative);
+  runGit(["add", ...pathsToAdd]);
   runGit(["commit", "-m", `Add AI draft: ${content.title}`]);
   runGit(["push", "-u", "origin", branch]);
   const pr = await createDraftPullRequest({ title, body, branch });
@@ -116,4 +123,35 @@ async function publishDraftPr({ content, safetyResult, editorResult, draftPath, 
   return output;
 }
 
-module.exports = { publishDraftPr, prBody };
+function commitFilesToBranch({ branch, filePaths, message, logger }) {
+  if (config.dryRun || !config.github.allowPush) {
+    const simulated = {
+      dry_run: true,
+      branch,
+      files: filePaths.map(relative),
+      message,
+      note: "No branch update was pushed because DRY_RUN is true or AI_ALLOW_GITHUB_PUSH is not true.",
+    };
+    logger?.write({ phase: "PublisherAgent", status: "dry_run_branch_update", output: simulated });
+    return simulated;
+  }
+
+  if (config.allowNetlifyBuildHook) {
+    throw new Error("PublisherAgent refused branch update because AI_ALLOW_NETLIFY_BUILD_HOOK=true.");
+  }
+
+  runGit(["checkout", branch]);
+  runGit(["add", ...filePaths.map(relative)]);
+  try {
+    runGit(["commit", "-m", message]);
+  } catch (error) {
+    logger?.write({ phase: "PublisherAgent", status: "branch_update_no_changes", branch, message });
+    return { branch, changed: false };
+  }
+  runGit(["push", "origin", branch]);
+  const output = { branch, changed: true, files: filePaths.map(relative) };
+  logger?.write({ phase: "PublisherAgent", status: "branch_update_completed", output });
+  return output;
+}
+
+module.exports = { publishDraftPr, prBody, commitFilesToBranch };

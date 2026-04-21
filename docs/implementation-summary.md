@@ -18,7 +18,8 @@ La homepage aveva un conflitto Git aperto: un lato conteneva la homepage reale, 
 - Aggiunta ossatura multi-agente AI con prompt, schemi JSON, orchestrator e logger.
 - Completato workflow multi-agente production-safe con provider OpenAI, demo mode, SafetyAgent deterministico+AI, EditorAgent, draft writer, branch/commit/draft PR e dry-run.
 - Aggiunti preflight live, quality gate contenuti e comando `npm run ai:test-live` per test reale controllato.
-- Aggiunti `package.json`, `netlify.toml`, `.env.example`, workflow GitHub Actions e documentazione operativa.
+- Aggiunta modalita settimanale `weekly-draft-pr` con `npm run ai:weekly`, summary JSON e flow di revisione umana.
+- Aggiunti `package.json`, `netlify.toml`, `.env.example` e documentazione operativa.
 
 ## Struttura finale
 
@@ -68,6 +69,49 @@ npm run orchestrator
 
 Configurare le env vars indicate in `.env.example` e `docs/railway-setup.md`.
 
+## Railway integration
+
+File aggiornati per il collegamento Railway:
+
+- `docs/railway-setup.md`
+- `docs/production-rollout.md`
+- `docs/go-live-checklist.md`
+- `automation/orchestrator/preflight.js`
+- `automation/orchestrator/weekly.js`
+
+Env obbligatorie per il cron settimanale:
+
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL`
+- `GITHUB_TOKEN`
+- `GITHUB_OWNER`
+- `GITHUB_REPO`
+- `GITHUB_BRANCH`
+- `GITHUB_API_BASE_URL`
+- `SITE_URL`
+- `CONTENT_BASE_URL`
+- `AI_PROFILE=weekly-draft-pr`
+- `AI_WEEKLY_SCHEDULE_ENABLED=true`
+- `AI_WEEKLY_ARTICLES=1`
+- `AI_WEEKLY_NEWS=1`
+- `AI_WEEKLY_MAX_TOTAL=3`
+- `AI_RUN_MODE=draft-pr`
+- `DRY_RUN=false`
+- `AI_ALLOW_GITHUB_PUSH=true`
+- `AI_ALLOW_NETLIFY_BUILD_HOOK=false`
+- `AI_PREFLIGHT_NETWORK=true`
+
+Passi manuali su Railway:
+
+1. Creare progetto collegato al repository GitHub.
+2. Configurare le env vars.
+3. Eseguire da Console `npm run ai:preflight`.
+4. Eseguire da Console `npm run ai:weekly` per il primo test controllato.
+5. Creare un cron job con comando `npm run ai:weekly`.
+6. Schedulare idealmente ogni lunedi alle 07:00, cron `0 7 * * 1`.
+
+Il risultato atteso e la creazione di draft PR su branch `ai-content/...`; merge e deploy restano manuali.
+
 ## Decap CMS
 
 Entrare da `/admin/`. Le collection principali sono:
@@ -93,6 +137,7 @@ npm run ai:publish-pr
 npm run ai:preflight
 npm run ai:run
 npm run ai:test-live
+npm run ai:weekly
 ```
 
 `npm run ai:run` esegue il workflow safe:
@@ -139,6 +184,37 @@ Il token GitHub fine-grained deve avere solo:
 
 `NETLIFY_BUILD_HOOK_URL` e opzionale, deve restare server-side e non viene usato dal workflow AI.
 
+## Modalita Weekly con Ultima Parola Umana
+
+`npm run ai:weekly` e pensato per cron Railway.
+
+Flusso:
+
+1. Railway esegue il job settimanale.
+2. ScoutAgent e PlannerAgent scelgono i temi.
+3. Per default vengono pianificati 1 approfondimento e 1 news, entro `AI_WEEKLY_MAX_TOTAL`.
+4. WriterAgent genera bozze.
+5. SafetyAgent esegue review AI e controlli deterministici locali.
+6. EditorAgent rifinisce i testi.
+7. PublisherAgent crea branch, commit e draft PR.
+8. Viene scritto `logs/editorial/weekly-YYYY-MM-DD-summary.json`.
+9. L'umano legge le PR e decide cosa mergiare.
+10. Netlify deploya solo dopo merge manuale sul branch configurato.
+
+Env principali:
+
+- `AI_PROFILE=weekly-draft-pr`
+- `AI_WEEKLY_SCHEDULE_ENABLED=true`
+- `AI_WEEKLY_ARTICLES=1`
+- `AI_WEEKLY_NEWS=1`
+- `AI_WEEKLY_MAX_TOTAL=3`
+- `AI_RUN_MODE=draft-pr`
+- `DRY_RUN=false`
+- `AI_ALLOW_GITHUB_PUSH=true`
+- `AI_ALLOW_NETLIFY_BUILD_HOOK=false`
+
+La modalita weekly non fa merge, non pubblica contenuti e non chiama Netlify build hook.
+
 ## Production-readiness finale
 
 - Deploy statico pronto con `npm run build`, publish directory `.` e Node 20.
@@ -147,6 +223,7 @@ Il token GitHub fine-grained deve avere solo:
 - Quality gate obbligatorio prima della scrittura/publish PR della bozza AI.
 - Checklist go-live in `docs/go-live-checklist.md`.
 - Checklist deploy manuale in `docs/manual-deploy-checklist.md`.
+- Flow revisione umana in `docs/human-review-flow.md`.
 
 ## Da rifinire
 

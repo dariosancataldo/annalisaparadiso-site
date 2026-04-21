@@ -15,6 +15,7 @@ const config = {
   provider: process.env.AI_PROVIDER || "openai",
   model: process.env.OPENAI_MODEL || process.env.AI_MODEL || "gpt-5.4",
   runMode: process.env.AI_RUN_MODE || "demo",
+  profile: process.env.AI_PROFILE || "",
   dryRun: process.env.DRY_RUN !== "false",
   topic: process.env.AI_CONTENT_TOPIC || "",
   pillar: process.env.AI_CONTENT_PILLAR || "",
@@ -33,6 +34,12 @@ const config = {
   netlifyBuildHookUrl: process.env.NETLIFY_BUILD_HOOK_URL || "",
   allowNetlifyBuildHook: process.env.AI_ALLOW_NETLIFY_BUILD_HOOK === "true",
   maxPublishRiskLevel: process.env.MAX_PUBLISH_RISK_LEVEL || "low",
+  weekly: {
+    enabled: process.env.AI_WEEKLY_SCHEDULE_ENABLED === "true",
+    articles: Number(process.env.AI_WEEKLY_ARTICLES || 1),
+    news: Number(process.env.AI_WEEKLY_NEWS || 1),
+    maxTotal: Number(process.env.AI_WEEKLY_MAX_TOTAL || 3),
+  },
 };
 
 module.exports = { config };

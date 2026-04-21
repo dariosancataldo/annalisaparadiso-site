@@ -44,3 +44,47 @@ Anche in questa fase restano vietati:
 - merge automatico;
 - pubblicazione high-risk;
 - deploy con build hook esposto al frontend.
+
+## Schedulare ai:weekly su Railway
+
+Configurare un cron/scheduled job Railway con comando:
+
+```bash
+npm run ai:weekly
+```
+
+Env richieste per la modalita settimanale:
+
+- `AI_PROFILE=weekly-draft-pr`
+- `AI_WEEKLY_SCHEDULE_ENABLED=true`
+- `AI_WEEKLY_ARTICLES=1`
+- `AI_WEEKLY_NEWS=1`
+- `AI_WEEKLY_MAX_TOTAL=3`
+- `AI_RUN_MODE=draft-pr`
+- `DRY_RUN=false`
+- `AI_ALLOW_GITHUB_PUSH=true`
+- `AI_ALLOW_NETLIFY_BUILD_HOOK=false`
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL`
+- `GITHUB_TOKEN`
+- `GITHUB_OWNER`
+- `GITHUB_REPO`
+- `GITHUB_BRANCH`
+- `GITHUB_API_BASE_URL`
+- `SITE_URL`
+- `CONTENT_BASE_URL`
+- `AI_PREFLIGHT_NETWORK=true`
+
+Consiglio operativo: schedulare alle 07:00 Europe/Rome. Alle 09:00 dovrebbero essere pronte le draft PR e il file `logs/editorial/weekly-YYYY-MM-DD-summary.json`.
+
+Cron expression consigliata:
+
+```cron
+0 7 * * 1
+```
+
+Se Railway interpreta il cron in UTC, adattare l'orario rispetto a Europe/Rome.
+
+La pipeline settimanale non fa merge, non cambia `main` direttamente e non chiama Netlify build hook. L'umano decide cosa mergiare e pubblicare.
+
+Guida dettagliata: `docs/railway-setup.md`.
