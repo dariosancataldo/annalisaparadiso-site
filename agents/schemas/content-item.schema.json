@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContentItem",
+  "type": "object",
+  "required": [
+    "title",
+    "date",
+    "slug",
+    "excerpt",
+    "category",
+    "tags",
+    "seo_title",
+    "seo_description",
+    "featured",
+    "status",
+    "risk_level",
+    "canonical",
+    "cover_image",
+    "body"
+  ],
+  "properties": {
+    "title": { "type": "string" },
+    "date": { "type": "string" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "excerpt": { "type": "string" },
+    "category": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "seo_title": { "type": "string", "maxLength": 70 },
+    "seo_description": { "type": "string", "maxLength": 170 },
+    "featured": { "type": "boolean" },
+    "status": { "type": "string", "enum": ["draft", "review", "approved", "published"] },
+    "risk_level": { "type": "string", "enum": ["low", "medium", "high"] },
+    "canonical": { "type": "string" },
+    "cover_image": { "type": "string" },
+    "body": { "type": "string" }
+  }
+}

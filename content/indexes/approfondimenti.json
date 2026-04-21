@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Ansia e attacchi di panico: riconoscere i segnali",
+    "date": "2026-04-07T12:00:00.000+02:00",
+    "slug": "ansia-e-attacchi-di-panico",
+    "excerpt": "Un approfondimento per comprendere come si manifesta l'ansia, cosa accade durante un attacco di panico e quando puo essere utile chiedere aiuto.",
+    "category": "Ansia",
+    "tags": [
+      "ansia",
+      "attacchi di panico",
+      "psicoterapia"
+    ],
+    "featured": true,
+    "status": "published",
+    "risk_level": "medium",
+    "canonical": "",
+    "cover_image": "https://images.unsplash.com/photo-1474418397713-7ede21d46114?w=1600&q=80",
+    "url": "/approfondimenti/ansia-e-attacchi-di-panico.html"
+  },
+  {
+    "title": "Autostima e critica interiore",
+    "date": "2026-04-07T12:00:00.000+02:00",
+    "slug": "autostima-e-critica-interiore",
+    "excerpt": "Una riflessione sul modo in cui il dialogo interno puo sostenere o ferire l'immagine di se.",
+    "category": "Autostima",
+    "tags": [
+      "autostima",
+      "critica interiore",
+      "identita"
+    ],
+    "featured": false,
+    "status": "published",
+    "risk_level": "medium",
+    "canonical": "",
+    "cover_image": "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1600&q=80",
+    "url": "/approfondimenti/autostima-e-critica-interiore.html"
+  },
+  {
+    "title": "Dipendenza affettiva: quando l'amore diventa sofferenza",
+    "date": "2026-04-07T12:00:00.000+02:00",
+    "slug": "dipendenza-affettiva",
+    "excerpt": "Riconoscere legami affettivi che generano sofferenza puo aprire uno spazio di consapevolezza e cura.",
+    "category": "Relazioni",
+    "tags": [
+      "dipendenza affettiva",
+      "relazioni",
+      "autonomia emotiva"
+    ],
+    "featured": false,
+    "status": "published",
+    "risk_level": "medium",
+    "canonical": "",
+    "cover_image": "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1600&q=80",
+    "url": "/approfondimenti/dipendenza-affettiva.html"
+  },
+  {
+    "title": "Il lutto e la perdita: attraversare il dolore",
+    "date": "2026-04-07T12:00:00.000+02:00",
+    "slug": "il-lutto-e-la-perdita",
+    "excerpt": "Il lutto richiede tempo, rispetto e ascolto: non esiste un modo unico o corretto di attraversare una perdita.",
+    "category": "Lutto",
+    "tags": [
+      "lutto",
+      "perdita",
+      "dolore"
+    ],
+    "featured": false,
+    "status": "published",
+    "risk_level": "medium",
+    "canonical": "",
+    "cover_image": "https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?w=1600&q=80",
+    "url": "/approfondimenti/il-lutto-e-la-perdita.html"
+  },
+  {
+    "title": "Comprendere la depressione: oltre la tristezza profonda",
+    "date": "2026-04-07T12:00:00.000+02:00",
+    "slug": "la-depressione",
+    "excerpt": "Una lettura sobria della depressione come esperienza complessa che coinvolge corpo, pensieri, relazioni e senso di se.",
+    "category": "Depressione",
+    "tags": [
+      "depressione",
+      "umore",
+      "psicoterapia"
+    ],
+    "featured": false,
+    "status": "published",
+    "risk_level": "medium",
+    "canonical": "",
+    "cover_image": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1600&q=80",
+    "url": "/approfondimenti/la-depressione.html"
+  },
+  {
+    "title": "Psicoterapia psicoanalitica: come funziona",
+    "date": "2026-04-07T12:00:00.000+02:00",
+    "slug": "psicoterapia-psicoanalitica",
+    "excerpt": "Un'introduzione accessibile al percorso psicoanalitico come spazio di ascolto, parola e comprensione di se.",
+    "category": "Psicoterapia",
+    "tags": [
+      "psicoterapia psicoanalitica",
+      "primo colloquio",
+      "percorso terapeutico"
+    ],
+    "featured": true,
+    "status": "published",
+    "risk_level": "medium",
+    "canonical": "",
+    "cover_image": "https://images.unsplash.com/photo-1527137342181-19aab11a8ee1?w=1600&q=80",
+    "url": "/approfondimenti/psicoterapia-psicoanalitica.html"
+  }
+]

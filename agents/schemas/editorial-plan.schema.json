@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EditorialPlan",
+  "type": "object",
+  "required": ["pillar", "audience_need", "angle", "risk_level", "brief", "internal_links"],
+  "properties": {
+    "pillar": {
+      "type": "string",
+      "enum": [
+        "ansia e attacchi di panico",
+        "depressione",
+        "dipendenza affettiva",
+        "autostima e critica interiore",
+        "lutto e perdita",
+        "psicoterapia psicoanalitica",
+        "primo colloquio",
+        "terapia online",
+        "relazioni"
+      ]
+    },
+    "audience_need": { "type": "string" },
+    "angle": { "type": "string" },
+    "risk_level": { "type": "string", "enum": ["low", "medium", "high"] },
+    "brief": { "type": "string" },
+    "internal_links": { "type": "array", "items": { "type": "string" } }
+  }
+}

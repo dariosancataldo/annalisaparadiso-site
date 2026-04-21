@@ -1,0 +1,25 @@
+{
+  "name": "annalisaparadiso-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sito statico e sistema editoriale per Annalisa Paradiso.",
+  "scripts": {
+    "migrate:legacy": "node scripts/migrate-legacy-articles.js",
+    "validate:content": "node scripts/validate-content.js",
+    "generate:indexes": "node scripts/generate-indexes.js",
+    "build:content": "node scripts/build-content.js",
+    "build": "npm run validate:content && npm run build:content",
+    "orchestrator": "node automation/orchestrator/index.js",
+    "ai:scout": "node automation/cli/scout.js",
+    "ai:plan": "node automation/cli/plan.js",
+    "ai:generate": "node automation/cli/generate.js",
+    "ai:review": "node automation/cli/review.js",
+    "ai:publish-pr": "node automation/cli/publish-pr.js",
+    "ai:preflight": "node automation/cli/preflight.js",
+    "ai:run": "node automation/orchestrator/run-once.js",
+    "ai:test-live": "AI_RUN_MODE=draft-pr DRY_RUN=false AI_ALLOW_GITHUB_PUSH=true AI_ALLOW_NETLIFY_BUILD_HOOK=false AI_PREFLIGHT_NETWORK=true node automation/orchestrator/run-once.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

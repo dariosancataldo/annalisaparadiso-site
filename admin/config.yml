@@ -10,6 +10,8 @@ backend:
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
+locale: "it"
+publish_mode: editorial_workflow
 
 collections:
   - name: "news"
@@ -17,17 +19,63 @@ collections:
     folder: "content/news"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} · {{status}} · {{risk_level}}"
     fields:
-      - { label: "Titolo", name: "title", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Contenuto", name: "body", widget: "markdown" }
+      - { label: "Titolo", name: "title", widget: "string", hint: "Titolo chiaro, naturale, non sensazionalistico." }
+      - { label: "Data", name: "date", widget: "datetime", default: "{{now}}" }
+      - { label: "Slug URL", name: "slug", widget: "string", hint: "Solo minuscole, numeri e trattini. Esempio: nuovo-orario-studio" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Sintesi breve per card e meta, 1-2 frasi." }
+      - { label: "Categoria", name: "category", widget: "select", options: ["Studio", "Comunicazioni", "Eventi", "Psicologia", "Psicoterapia"], default: "Studio" }
+      - { label: "Tag", name: "tags", widget: "list", required: false, default: [] }
+      - { label: "SEO title", name: "seo_title", widget: "string", hint: "Massimo consigliato: 60-70 caratteri." }
+      - { label: "SEO description", name: "seo_description", widget: "text", hint: "Massimo consigliato: 150-170 caratteri." }
+      - { label: "In evidenza", name: "featured", widget: "boolean", default: false }
+      - { label: "Stato", name: "status", widget: "select", options: ["draft", "review", "approved", "published"], default: "draft" }
+      - { label: "Livello di rischio editoriale", name: "risk_level", widget: "select", options: ["low", "medium", "high"], default: "low", hint: "Usare high per contenuti clinicamente sensibili: richiedono revisione umana." }
+      - { label: "Canonical URL", name: "canonical", widget: "string", required: false, default: "" }
+      - { label: "Immagine cover", name: "cover_image", widget: "image", required: false, default: "" }
+      - { label: "Contenuto", name: "body", widget: "markdown", hint: "Informativo, sobrio, non prescrittivo. Evitare diagnosi e promesse di guarigione." }
 
   - name: "approfondimenti"
     label: "Approfondimenti"
     folder: "content/approfondimenti"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} · {{status}} · {{risk_level}}"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string", hint: "Titolo utile e umano, senza promessa clinica." }
+      - { label: "Data", name: "date", widget: "datetime", default: "{{now}}" }
+      - { label: "Slug URL", name: "slug", widget: "string", hint: "Solo minuscole, numeri e trattini. Esempio: ansia-e-primo-colloquio" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Sintesi breve, rassicurante e concreta." }
+      - { label: "Categoria", name: "category", widget: "select", options: ["Ansia", "Depressione", "Relazioni", "Autostima", "Lutto", "Psicoterapia", "Primo colloquio", "Terapia online"], default: "Psicoterapia" }
+      - { label: "Tag", name: "tags", widget: "list", required: false, default: [] }
+      - { label: "SEO title", name: "seo_title", widget: "string", hint: "Massimo consigliato: 60-70 caratteri." }
+      - { label: "SEO description", name: "seo_description", widget: "text", hint: "Massimo consigliato: 150-170 caratteri." }
+      - { label: "In evidenza", name: "featured", widget: "boolean", default: false }
+      - { label: "Stato", name: "status", widget: "select", options: ["draft", "review", "approved", "published"], default: "draft" }
+      - { label: "Livello di rischio editoriale", name: "risk_level", widget: "select", options: ["low", "medium", "high"], default: "medium", hint: "Medium o high richiedono controllo clinico prima della pubblicazione." }
+      - { label: "Canonical URL", name: "canonical", widget: "string", required: false, default: "" }
+      - { label: "Immagine cover", name: "cover_image", widget: "image", required: false, default: "" }
+      - { label: "Contenuto", name: "body", widget: "markdown", hint: "People-first: spiegare, orientare, invitare al colloquio quando opportuno." }
+
+  - name: "drafts"
+    label: "Bozze AI / Revisione"
+    folder: "content/drafts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Titolo", name: "title", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Data", name: "date", widget: "datetime", default: "{{now}}" }
+      - { label: "Slug URL", name: "slug", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Categoria", name: "category", widget: "string", default: "Psicoterapia" }
+      - { label: "Tag", name: "tags", widget: "list", required: false, default: [] }
+      - { label: "SEO title", name: "seo_title", widget: "string" }
+      - { label: "SEO description", name: "seo_description", widget: "text" }
+      - { label: "In evidenza", name: "featured", widget: "boolean", default: false }
+      - { label: "Stato", name: "status", widget: "select", options: ["draft", "review", "approved"], default: "draft" }
+      - { label: "Livello di rischio editoriale", name: "risk_level", widget: "select", options: ["low", "medium", "high"], default: "medium" }
+      - { label: "Canonical URL", name: "canonical", widget: "string", required: false, default: "" }
+      - { label: "Immagine cover", name: "cover_image", widget: "image", required: false, default: "" }
+      - { label: "Note revisione", name: "review_notes", widget: "text", required: false }
       - { label: "Contenuto", name: "body", widget: "markdown" }

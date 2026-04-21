@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ansia e attacchi di panico: riconoscere i segnali | Annalisa Paradiso</title>
+  <meta name="description" content="Un approfondimento per comprendere come si manifesta l&#39;ansia, cosa accade durante un attacco di panico e quando puo essere utile chiedere aiuto.">
+  <meta property="og:title" content="Ansia e attacchi di panico: riconoscere i segnali | Annalisa Paradiso">
+  <meta property="og:description" content="Un approfondimento per comprendere come si manifesta l&#39;ansia, cosa accade durante un attacco di panico e quando puo essere utile chiedere aiuto.">
+  <meta property="og:type" content="article">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>:root,
+[data-theme="light"] {
+  --text-xs: clamp(.75rem, .7rem + .25vw, .875rem);
+  --text-sm: clamp(.875rem, .8rem + .35vw, 1rem);
+  --text-base: clamp(1rem, .95rem + .25vw, 1.08rem);
+  --text-lg: clamp(1.125rem, 1rem + .75vw, 1.45rem);
+  --text-xl: clamp(1.55rem, 1.2rem + 1.25vw, 2.2rem);
+  --text-2xl: clamp(2.2rem, 1.2rem + 2.8vw, 4rem);
+  --bg: #fcf8fc;
+  --surface: #ffffff;
+  --surface-2: #f7eff9;
+  --surface-3: #f0e3f5;
+  --border: #e2d4e8;
+  --text: #2e2332;
+  --muted: #6e6376;
+  --faint: #978ca1;
+  --primary: #8d6db1;
+  --primary-hover: #744f93;
+  --primary-soft: #ede3f6;
+  --primary-deep: #5e4378;
+  --inverse: #fffdfd;
+  --shadow-sm: 0 4px 16px rgba(90, 56, 122, .07);
+  --shadow-md: 0 18px 44px rgba(90, 56, 122, .12);
+  --radius-lg: 1.3rem;
+  --radius-full: 999px;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', Arial, sans-serif;
+  --content: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--text);
+  background: radial-gradient(circle at top left, rgba(188, 165, 216, .13), transparent 28%),
+    linear-gradient(180deg, var(--bg), var(--surface-2));
+}
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; height: auto; }
+.container { width: min(calc(100% - 2rem), var(--content)); margin-inline: auto; }
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+.header-inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; }
+.brand { display: flex; align-items: center; gap: .9rem; }
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--primary-soft), var(--surface));
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-sm);
+}
+.brand-copy strong { display: block; font-size: var(--text-sm); }
+.brand-copy span { display: block; font-size: var(--text-xs); color: var(--muted); }
+.nav-actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  min-height: 46px;
+  padding: .82rem 1.15rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--primary); color: var(--inverse); box-shadow: var(--shadow-sm); }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-secondary { background: var(--surface); border-color: var(--border); }
+.btn-secondary:hover { background: var(--surface-2); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; margin: 0; font-weight: 600; }
+p { margin: 0 0 1rem; }
+.page-section { padding: 4.5rem 0; }
+.section-head { margin-bottom: 2rem; max-width: 72ch; }
+.section-head h1 { font-size: var(--text-2xl); }
+.section-head h2 { font-size: var(--text-xl); }
+.section-head p { margin-top: .8rem; color: var(--muted); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.article-card { padding: 1.35rem; transition: transform 180ms ease, box-shadow 180ms ease; }
+.article-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.article-meta { display: flex; gap: .7rem; align-items: center; flex-wrap: wrap; margin-bottom: .85rem; font-size: var(--text-xs); color: var(--faint); }
+.article-category, .badge {
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+  padding: .28rem .68rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.article-card h2, .article-card h3 { font-size: var(--text-lg); margin-bottom: .65rem; }
+.article-card p { color: var(--muted); font-size: var(--text-sm); }
+.article-shell { width: min(calc(100% - 2rem), 820px); margin-inline: auto; padding: 4rem 0; }
+.article-shell h1 { font-size: var(--text-2xl); margin-bottom: 1rem; }
+.article-shell h2 { font-size: var(--text-xl); margin: 2.4rem 0 .8rem; }
+.article-shell p, .article-shell li { color: var(--text); }
+.article-shell .lead { color: var(--muted); font-size: var(--text-lg); }
+.article-cover {
+  min-height: 320px;
+  background: var(--surface-3);
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: end start;
+  position: relative;
+}
+.article-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.42)); }
+.article-cover-inner { position: relative; z-index: 1; color: white; padding: 4rem max(1rem, calc((100vw - 820px) / 2)); max-width: 900px; }
+.article-cover-inner h1 { font-size: var(--text-2xl); text-shadow: 0 2px 18px rgba(0,0,0,.22); }
+.content-body a { color: var(--primary-deep); text-decoration: underline; text-underline-offset: 3px; }
+.content-body ul, .content-body ol { padding-left: 1.3rem; }
+.footer { padding: 3rem 0; border-top: 1px solid var(--border); color: var(--faint); font-size: var(--text-xs); }
+@media (max-width: 760px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .header-inner { align-items: flex-start; }
+  .nav-actions { justify-content: flex-end; }
+}
+</style>
+</head>
+<body>
+  <header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <span class="logo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M12 3c3.4 0 6.2 2.8 6.2 6.2 0 5.6-6.2 11.8-6.2 11.8S5.8 14.8 5.8 9.2C5.8 5.8 8.6 3 12 3Z"/>
+          <path d="M9.3 10.3c.6 1.4 1.6 2.1 2.7 2.1 1.1 0 2.1-.7 2.7-2.1"/>
+        </svg>
+      </span>
+      <span class="brand-copy">
+        <strong>Annalisa Paradiso</strong>
+        <span>Psicologa e Psicoterapeuta</span>
+      </span>
+    </a>
+    <nav class="nav-actions" aria-label="Navigazione principale">
+      <a href="../blog/index.html" class="btn btn-secondary">Approfondimenti</a>
+      <a href="../news/index.html" class="btn btn-secondary">News</a>
+      <a href="../index.html#contatti" class="btn btn-primary">Contatti</a>
+    </nav>
+  </div>
+</header>
+  <section class="article-cover" style="background-image:url('https://images.unsplash.com/photo-1474418397713-7ede21d46114?w=1600&amp;q=80')">
+    <div class="article-cover-inner">
+      <div class="article-meta">
+        <span class="article-category">Ansia</span>
+        <span>07 aprile 2026</span>
+      </div>
+      <h1>Ansia e attacchi di panico: riconoscere i segnali</h1>
+    </div>
+  </section>
+  <article class="article-shell">
+    <a href="index.html" class="btn btn-secondary">Torna all'archivio</a>
+    <p class="lead">Un approfondimento per comprendere come si manifesta l&#39;ansia, cosa accade durante un attacco di panico e quando puo essere utile chiedere aiuto.</p>
+    <div class="content-body"><p>L'ansia può manifestarsi in molte forme, da una sottile tensione costante a un attacco di panico improvviso e travolgente. Capire cosa succede nel corpo e nella mente è il primo passo per affrontare questa condizione.</p>
+<h2>Cos'è l'attacco di panico?</h2>
+<p>È un'esperienza di paura intensa che compare improvvisamente, accompagnata da sintomi fisici come tachicardia, fiato corto, tremori o senso di svenimento. Spesso è accompagnato dalla paura di "impazzire" o di perdere il controllo.</p>
+<h2>Come uscirne?</h2>
+<p>Attraverso un percorso terapeutico è possibile imparare a gestire questi momenti, comprendendo i significati profondi che l'ansia porta con sé e acquisendo strumenti pratici per ritrovare la calma.</p></div>
+  </article>
+  <footer class="footer">
+    <div class="container">© 2026 Dott.ssa Annalisa Paradiso · Contenuti informativi, non sostituiscono un colloquio clinico.</div>
+  </footer>
+</body>
+</html>

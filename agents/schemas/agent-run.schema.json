@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentRun",
+  "type": "object",
+  "required": ["agent", "input", "output", "policy_checks"],
+  "properties": {
+    "agent": {
+      "type": "string",
+      "enum": ["ScoutAgent", "PlannerAgent", "WriterAgent", "SafetyAgent", "EditorAgent", "PublisherAgent"]
+    },
+    "input": { "type": "object" },
+    "output": { "type": "object" },
+    "policy_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["policy", "status"],
+        "properties": {
+          "policy": { "type": "string" },
+          "status": { "type": "string", "enum": ["pass", "warning", "fail"] },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

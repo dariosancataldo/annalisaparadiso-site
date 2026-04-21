@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SafetyReview",
+  "type": "object",
+  "required": ["outcome", "risk_level", "publication_allowed", "violations", "required_changes"],
+  "properties": {
+    "outcome": { "type": "string", "enum": ["approved", "needs_revision", "blocked"] },
+    "risk_level": { "type": "string", "enum": ["low", "medium", "high"] },
+    "publication_allowed": { "type": "boolean" },
+    "violations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule": { "type": "string" },
+          "severity": { "type": "string", "enum": ["review", "block"] },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "required_changes": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}
